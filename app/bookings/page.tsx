@@ -1,12 +1,10 @@
 import { getServerSession } from "next-auth";
 import Header from "../_components/header";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { db } from "../lib/prisma";
 import BookingItem from "../_components/booking-item";
 import { Key } from "react";
-import { isFuture, isPast } from "date-fns";
 
 const BookingsPage = async () => {
   const session = await getServerSession(authOptions);
@@ -52,11 +50,11 @@ const BookingsPage = async () => {
     <>
       <Header />
       <div className="px-5 py-6">
-        <h1 className="text-xl font-bold">Agendamentos</h1>
+        <h1 className="text-xl font-bold mb-6">Agendamentos</h1>
 
         {confirmedBookings.length > 0 && (
           <>
-            <h2 className="text-gray-400 font-bold text-sm uppercase mt-6 mb-3">
+            <h2 className="text-gray-400 font-bold text-sm uppercase mb-3">
               Confirmados
             </h2>
             <div className="flex flex-col gap-3">
