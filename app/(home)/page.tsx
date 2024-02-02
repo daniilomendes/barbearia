@@ -27,19 +27,19 @@ export default async function Home() {
         <Search />
       </div>
 
-      <div className="px-5 mt-6">
+      {/* <div className="px-5 mt-6">
         <h2 className="text-xs uppercase text-gray-400 font-bold mb-3">
           Agendamentos
         </h2>
         <BookingItem />
-      </div>
+      </div> */}
 
       <div className="mt-6">
         <h2 className="text-xs px-5 uppercase text-gray-400 font-bold mb-3">
           Recomendados
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {barbershop.map((barbershop) => (
+          {barbershop.map((barbershop: { id: Key | null | undefined; }) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
@@ -50,7 +50,7 @@ export default async function Home() {
           Populares
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {barbershop.map((barbershop) => (
+          {barbershop.map((barbershop: { id: Key | null | undefined; }) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
