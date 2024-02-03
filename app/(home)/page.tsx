@@ -12,8 +12,13 @@ import { authOptions } from "../lib/auth";
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-  const [barbershop, confirmedBookings] = await Promise.all([
+  const [barbershop, recomendedBarbershops, confirmedBookings] = await Promise.all([
     db.barbershop.findMany({}),
+    db.barbershop.findMany({
+      orderBy: {
+        id:'asc'
+      }
+    }),
     session?.user
       ? db.booking.findMany({
           where: {
@@ -81,12 +86,12 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="mt-6 mb-2">
+      <div className="mt-6 mb-3">
         <h2 className="text-xs px-5 uppercase text-gray-400 font-bold mb-3">
           Populares
         </h2>
         <div className="flex px-5 gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {barbershop.map((barbershop: { id: Key | null | undefined }) => (
+          {recomendedBarbershops.map((barbershop: { id: Key | null | undefined }) => (
             <div key={barbershop.id} className="w-full max-w-[167px]">
               <BarbershopItem  barbershop={barbershop} />
             </div>
